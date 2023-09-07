@@ -10,6 +10,8 @@
     <div class='col-md-8 offset-md-1'>
       <%= render 'layouts/search' %>
       <h2>Books</h2>
+      <%= link_to '新しい順', books_path(latest: "true") %>
+      |<%= link_to '評価の高い順', books_path(star_count: "true") %>
       <%= render 'index', books: @books, book: @book %>
     </div>
   </div>

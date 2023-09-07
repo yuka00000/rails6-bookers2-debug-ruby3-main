@@ -12,6 +12,16 @@ class BooksController < ApplicationController
     @books = Book.all
     @book_comment = BookComment.new
     @user = User.find(current_user.id)
+
+    if params[:latest]
+      @books = Book.latest
+    elsif params[:old]
+      @books = Book.old
+    elsif params[:star_count]
+      @books = Book.star_count
+    else
+      @books = Book.all
+    end
   end
 
   def create
