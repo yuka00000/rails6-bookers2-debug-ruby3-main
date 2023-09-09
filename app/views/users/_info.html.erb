@@ -27,11 +27,20 @@
       <% end %>
     </th>
     <th>
-      <% unless user.id == current_user.id %>
-        <% if (current_user.following? user) && (user.following? current_user)  %>
-          <%= submit_tag "チャットを始める", class:"btn btn-primary"%>
+      <% unless @user.id == current_user.id %>
+    <% if (current_user.following? @user) && (@user.following? current_user)  %>
+      <% if @isRoom == true %>
+        <p class="user-show-room"><a href="/rooms/<%= @roomId %>" class="btn btn-primary">Chatを始める</a>
+      <% else %>
+        <%= form_for @room do |f| %>
+          <%= fields_for @entry do |e| %>
+            <%= e.hidden_field :user_id, value: @user.id %>
+          <% end %>
+          <%= f.submit "Chatを始める", class:"btn btn-primary"%>
         <% end %>
       <% end %>
+      <% end %>
+    <% end %>
     </th>
   </tr>
 </table>
